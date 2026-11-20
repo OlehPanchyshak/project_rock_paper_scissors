@@ -6,15 +6,22 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+   <div>Round Result:<div id="result"></div></div>
+    <div>Human choice:<div id="human"></div></div>
+   <div>Computer choice:<div id="computer"></div></div>
     <script>
         function getComputerChoice() {
             let randomNumber = Math.floor(Math.random() * 3);
             if (randomNumber === 0) {
-                return 'rock';
+                return 'Rock';
             } else if (randomNumber === 1) {
-                return 'paper';
+                return 'Paper';
             } else {
-                return 'scissors';
+                return 'Scissors';
             }
         }
         function getHumanChoice() {
@@ -26,9 +33,9 @@
         let computerScore = 0;
       
         function playRound (humanChoice, computerChoice){
-            if((humanChoice === 'rock' && computerChoice === 'scissors')||
-             (humanChoice === 'scissors' && computerChoice === 'paper') || 
-             (humanChoice === 'paper' && computerChoice === 'rock')) {
+            if((humanChoice === 'Rock' && computerChoice === 'Scissors')||
+             (humanChoice === 'Scissors' && computerChoice === 'Paper') || 
+             (humanChoice === 'Paper' && computerChoice === 'Rock')) {
                 humanScore++;
                 return `You win! ${humanChoice} beats ${computerChoice}.`;
             }
@@ -43,29 +50,36 @@
         }
         const humanChoice = getHumanChoice();
         const computerChoice = getComputerChoice();
+
+    const rock = document.querySelector("#rock");
+
+    rock.addEventListener("click", function(event){
+        palyGame("Rock")
+    });
+
+   const paper = document.querySelector("#paper");
+
+    paper.addEventListener("click", function(event){
+        palyGame("Paper")
+    });
+
+   const scissors = document.querySelector("#scissors");
+
+    scissors.addEventListener("click", function(event){
+        palyGame("Scissors")
+    });
     
-     
-       function playGame() {
-          humanScore = 0;
-          computerScore = 0;
-            for(let i = 1; i < 6; i++) { 
-                console.log(`Round ${i}`);
-              const humanChoice = getHumanChoice();
-              const computerChoice = getComputerChoice();
-              const roundResult = playRound (humanChoice, computerChoice);
-              console.log(roundResult);
-              console.log(`You ${humanScore} - Computer ${computerScore}`)
-            }
-            if (humanScore > computerScore) {
-                return "You are winner";
-            } else if (humanScore === computerScore) {
-                return "It's a tie"
-            }
-            else {
-                return "You lose";
-            }
-        }
-        console.log (playGame());
+    const result = document.querySelector("#result");
+    const human = document.querySelector("#human");
+    const computer = document.querySelector("#computer");
+
+
+    function palyGame(humanChoice){
+        human.textContent = humanChoice;
+        computer.textContent = getComputerChoice();
+        result.textContent = playRound(human.textContent, computer.textContent);
+    }
+
     </script>
 </body>
 </html> 
